@@ -2,10 +2,14 @@
 Release notes generator for SonarSource projects hosted on GitHub
 
 # Use
+```
 dotnet ReleaseNotes.dll <owner/repo> <milestone-name> <github-token>
+```
 
 ### Example
+```
 dotnet ReleaseNotes.dll SonarSource/sonar-csharp 7.8 <github-token>
+```
 
 ### Notes
 
