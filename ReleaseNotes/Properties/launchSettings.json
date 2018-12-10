@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "release-notes-gen": {
-      "commandName": "Project",
-      "commandLineArgs": "SonarSource/sonar-csharp 7.8"
-    }
-  }
-}

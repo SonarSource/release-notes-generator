@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.27703.2035
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReleaseNotes", "ReleaseNotes\ReleaseNotes.csproj", "{A9AEC4C5-BFE1-4107-AA87-E03F2F7889D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReleaseNotes.Tests", "ReleaseNotes.Tests\ReleaseNotes.Tests.csproj", "{5001ADFD-09E3-49B0-BF51-DD5AAD5F4DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReleaseNotes.Tests", "ReleaseNotes.Tests\ReleaseNotes.Tests.csproj", "{5001ADFD-09E3-49B0-BF51-DD5AAD5F4DA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BC2EEB0-B590-47D4-8FB4-2E81D0B542D8}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
