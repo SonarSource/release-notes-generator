@@ -16,7 +16,7 @@ namespace ReleaseNotes.Helpers
 
         public void Format(IEnumerable<Issue> issues)
         {
-            var issuesByKind = issues.ToLookup(IssueTypeHelper.GetIssueType, i => i);
+            var issuesByKind = issues.ToLookup(IssueHelper.GetIssueType, i => i);
 
             PrintGroup("### New Rules", issuesByKind[IssueType.NewRule]);
             PrintGroup("### Improvements", issuesByKind[IssueType.Improvement]);
@@ -38,11 +38,8 @@ namespace ReleaseNotes.Helpers
 
             foreach (var issue in issues)
             {
-                writer.WriteLine(ToBulletItem(issue));
+                writer.WriteLine(issue.ToBulletItem());
             }
         }
-
-        private string ToBulletItem(Issue issue) =>
-            $"* [{issue.Number}]({issue.HtmlUrl}) - {issue.Title}";
     }
 }

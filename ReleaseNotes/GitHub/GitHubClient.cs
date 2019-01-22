@@ -17,7 +17,7 @@ namespace ReleaseNotes.GitHub
                 throw new System.ArgumentOutOfRangeException(nameof(httpClient),
                     "HttpClient.BaseAddress should end with '/'");
             }
-            // The BaseAddress should be contain the repository name
+            // The BaseAddress should contain the repository name
             if (!baseAddress.StartsWith("https://api.github.com/repos/") ||
                 baseAddress.Length <= "https://api.github.com/repos/".Length)
             {
