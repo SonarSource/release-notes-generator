@@ -30,4 +30,6 @@ Currently works with the SonarC#/VB.NET and SonarLint for Visual Studio labels
 
 # Future
 
-Store the GitHub token on Azure, to avoid the need to provide it through the url
+- Store the GitHub token on Azure, to avoid the need to provide it through the url
+- Improve the error message when required request parameters are missing
+- Implement per-repository configuration and avoid hardcoding repository-specific labels. For example the Azure function could read the mappings from a file at well known location in the repository.
