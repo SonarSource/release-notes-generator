@@ -1,4 +1,8 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
@@ -6,6 +10,9 @@ namespace ReleaseNotes.GitHub
 {
     public class GitHubClient
     {
+        private const string LinkHeaderIdentifier = "Link";
+        private const string NextLinkHeaderIdentifier = "NEXT";
+        
         private readonly HttpClient httpClient;
 
         public GitHubClient(HttpClient httpClient)
@@ -40,10 +47,40 @@ namespace ReleaseNotes.GitHub
 
         public async Task<Issue[]> GetIssuesAsync(int milestoneNumber)
         {
-            var issuesString = await httpClient.GetStringAsync(
-                $"issues?state=all&milestone={milestoneNumber}");
+            var url = $"issues?state=all&milestone={milestoneNumber}";
 
-            return JsonConvert.DeserializeObject<Issue[]>(issuesString);
+            return await GetIssuesAsync(url);
+        }
+
+        private async Task<Issue[]> GetIssuesAsync(string url)
+        {
+            var response = await httpClient.GetAsync(url);
+
+            var issuesString = await response.Content.ReadAsStringAsync();
+            var issues = JsonConvert.DeserializeObject<Issue[]>(issuesString);
+            var nextPageUrl = GetNextPageUrl(response.Headers);
+
+            return string.IsNullOrEmpty(nextPageUrl)
+                ? issues
+                : issues.Concat(await GetIssuesAsync(nextPageUrl)).ToArray();
+        } 
+
+        private static string GetNextPageUrl(HttpHeaders headers)
+        {
+            var linkHeader = headers.GetValues(LinkHeaderIdentifier).FirstOrDefault();
+            if (linkHeader == null)
+            {
+                return null;
+            }
+            
+            var nextPageUrlQuery = from link in linkHeader.Split(',')
+                                   let relMatch = Regex.Match(link, "(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase)
+                                   where relMatch.Success && relMatch.Value.ToUpper() == NextLinkHeaderIdentifier
+                                   let linkMatch = Regex.Match(link, "(?<=<).+?(?=>)", RegexOptions.IgnoreCase)
+                                   where linkMatch.Success
+                                   select linkMatch.Value;
+            
+            return nextPageUrlQuery.FirstOrDefault();
         }
     }
 }
