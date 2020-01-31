@@ -42,6 +42,13 @@ namespace release_notes_tests
             var falseNegative = new Issue { Labels = new[] { new Label { Name = "Type: False Negative" } } };
             IssueHelper.GetIssueType(falseNegative).Should().Be(IssueType.FalseNegative);
         }
+        
+        [TestMethod]
+        public void GetIssueType_Existing_Labels_Performance()
+        {
+            var falseNegative = new Issue { Labels = new[] { new Label { Name = "Type: Performance" } } };
+            IssueHelper.GetIssueType(falseNegative).Should().Be(IssueType.Performance);
+        }
 
         [TestMethod]
         public void GetIssueType_Existing_Labels_Task()

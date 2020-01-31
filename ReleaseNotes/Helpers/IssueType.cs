@@ -7,6 +7,7 @@
         BugFix,
         FalsePositive,
         FalseNegative,
+        Performance,
         Hidden
     }
 }

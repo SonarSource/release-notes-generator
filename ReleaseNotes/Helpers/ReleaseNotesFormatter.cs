@@ -23,6 +23,7 @@ namespace ReleaseNotes.Helpers
             PrintGroup("### Bug Fixes", issuesByKind[IssueType.BugFix]);
             PrintGroup("### False Positive", issuesByKind[IssueType.FalsePositive]);
             PrintGroup("### False Negative", issuesByKind[IssueType.FalseNegative]);
+            PrintGroup("### Performance", issuesByKind[IssueType.Performance]);
             // Do not print issues from the IssueKind.Hidden group
         }
 

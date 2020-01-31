@@ -20,7 +20,8 @@ namespace ReleaseNotes.Helpers
             { "Type: Bug", IssueType.BugFix },
             { "Type: False Positive", IssueType.FalsePositive },
             { "Type: False Negative", IssueType.FalseNegative },
-            { "Type: Task", IssueType.Hidden },
+            { "Type: Performance", IssueType.Performance },
+            { "Type: Task", IssueType.Hidden }
         };
 
         public static IssueType GetIssueType(this Issue issue)
