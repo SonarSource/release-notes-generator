@@ -66,11 +66,12 @@ namespace ReleaseNotes.GitHub
 
         private static string GetNextPageUrl(HttpHeaders headers)
         {
-            var linkHeader = headers.GetValues(LinkHeaderIdentifier).FirstOrDefault();
-            if (linkHeader == null)
+            if (!headers.TryGetValues(LinkHeaderIdentifier, out var values))
             {
                 return null;
             }
+            
+            var linkHeader = values.First();
             
             var nextPageUrlQuery = from link in linkHeader.Split(',')
                                    let relMatch = Regex.Match(link, "(?<=rel=\").+?(?=\")", RegexOptions.IgnoreCase)
