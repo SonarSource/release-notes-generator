@@ -70,7 +70,7 @@ namespace ReleaseNotes
                 DefaultRequestHeaders =
                 {
                     { "User-Agent", "release-notes-generator" },
-                    { "Authorization", $"token {token}" }
+                    { "Authorization", token },
                 }
             };
 
